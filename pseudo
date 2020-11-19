@@ -1,0 +1,49 @@
+--requirements
+Home page
+    - Lists all uncompleted todos
+    - Has the ability to mark a todo as completed
+    - Contains a form that allows you to add a new todo
+Completed page
+    - Lists all completed to dos
+    - Has the ability to delete the completed to dos
+Stretch goals
+    - Add the ability to edit an uncompleted todo
+
+--components
+
+database
+    tasks
+        id
+        task (varchar)
+        completed (bool)
+model
+    getActiveTasks()
+    addTask($task)
+    completeTask($task)
+    getCompletedTasks()
+    deleteTask($task)
+    editTask($task)
+
+views
+    open tasks
+    completed tasks
+
+controllers
+    db factory
+    task factory
+
+
+--tasks
+
+create db - DONE
+build template pages - DONE
+create db connection - DONE
+create model class - DONE
+create model factory - DONE
+add model factory to DIC - DONE
+
+code
+get all tasks from db
+display tasks on page
+
+

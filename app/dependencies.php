@@ -33,5 +33,21 @@ return function (ContainerBuilder $containerBuilder) {
         return $renderer;
     };
 
+    $container['pdo'] = function (ContainerInterface $container) {
+        $pdo = new PDO('mysql:host=127.0.0.1; dbname=todo', 'root', 'password');
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        return $pdo;
+    };
+
+    $container['TaskModel'] = DI\Factory('App\Factories\TaskModelFactory');
+    $container['ActiveTasksController'] = DI\Factory('App\Factories\ActiveTasksControllerFactory');
+    $container['CompletedTasksController'] = DI\Factory('App\Factories\CompletedTasksControllerFactory');
+    $container['AddTaskController'] = DI\Factory('App\Factories\AddTaskControllerFactory');
+    $container['CompleteTaskController'] = DI\Factory('App\Factories\CompleteTaskControllerFactory');
+    $container['DeleteTaskController'] = DI\Factory('App\Factories\DeleteTaskControllerFactory');
+    $container['EditTaskController'] = DI\Factory('App\Factories\EditTaskControllerFactory');
+    $container['UpdateTaskController'] = DI\Factory('App\Factories\UpdateTaskControllerFactory');
+    $container['ReopenTaskController'] = DI\Factory('App\Factories\ReopenTaskControllerFactory');
+
     $containerBuilder->addDefinitions($container);
 };

@@ -15,6 +15,7 @@ return function (App $app) {
     $app->get('/edit', 'EditTaskController');
     $app->post('/update', 'UpdateTaskController');
     $app->post('/reopen', 'ReopenTaskController');
-    $app->get('/filter', 'ActiveTasksController');
+    $app->get('/filterActive', 'ActiveTasksController');
+    $app->get('/filterCompleted', 'CompletedTasksController');
 
 };

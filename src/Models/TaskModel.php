@@ -25,10 +25,10 @@ class TaskModel
         return $query->fetchAll();
     }
 
-    public function getCompletedTasks(): array
+    public function getCompletedTasks($filter): array
     {
-        $query = $this->db->prepare('SELECT * FROM `tasks` WHERE `completed` = 1 AND `archived` = 0;');
-        $query->execute();
+        $query = $this->db->prepare('SELECT * FROM `tasks` WHERE `completed` = 1 AND `archived` = 0 AND `category` like :filter ORDER BY `DUE` IS NULL, `DUE` ASC;');
+        $query->execute([':filter' => $filter]);
         return $query->fetchAll();
     }
 

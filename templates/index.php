@@ -44,7 +44,7 @@
     </head>
     <body>
         <h1>Active</h1>
-        <form action='/filter' method='get'>
+        <form action='/filterActive' method='get'>
             <label for='category'>Filter by category</label>
             <select id='category' name='categoryFilter' onchange='this.form.submit()'>
                 <option <?= $_SESSION['categoryFilter'] == 'All' ? 'selected' : '' ?>>All</option>

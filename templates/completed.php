@@ -27,6 +27,16 @@
                 margin-right:auto;
             }
 
+            .Work {
+                background-color: indianred;
+                color: white;
+            }
+
+            .Personal {
+                background-color: lightyellow;
+                color: black;
+            }
+
             button {
                 margin: 10px;
             }
@@ -36,12 +46,20 @@
         <h1>Completed</h1>
         <table>
             <?php
+            echo
+                '<tr>
+                    <th>Task</th>
+                    <th>Due</th>
+                </tr>';
             if ($tasks) {
                 foreach ($tasks as $task) {
                     echo
-                        '<tr>'.
+                        '<tr class="'.$task['category'].'">'.
                             '<td>'.
-                                $task['task'].
+                            $task['task'].
+                            '</td>'.
+                            '<td>'.
+                            $task['due'].
                             '</td>'.
                             '<td>'.
                                 '<form action="/reopen" method="post"><input name="'.$task['id'].'" type="submit" value="Reopen"></form>'.

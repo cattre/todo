@@ -57,7 +57,7 @@ class TaskModel
         return $query->fetch();
     }
 
-    public function updateTask(int $taskId, string $task = '', $category, string $due = '')
+    public function updateTask(int $taskId, string $task, string $category, $due)
     {
         $query = $this->db->prepare('UPDATE `tasks` SET `task` = :task, `category` = :category, `due` = :due WHERE `id` = :taskId;');
         $query->execute([':taskId' => $taskId, ':task' => $task, ':category' => $category, ':due' => $due]);

@@ -23,7 +23,7 @@ class UpdateTaskController
         $taskId = $request->getParsedBody()['id'];
         $task = $request->getParsedBody()['task'];
         $category = $request->getParsedBody()['category'];
-        $due = $request->getParsedBody()['due'] != '' ?: null;
+        $due = $request->getParsedBody()['due'] == '' ? null : $request->getParsedBody()['due'];
         $this->model->updateTask($taskId, $task, $category, $due);
         return $response->withHeader('Location','/');
     }

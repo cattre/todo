@@ -45,14 +45,13 @@
     <body>
         <h1>Active</h1>
         <form action='/filter' method='get'>
-            <label for='category'>Category</label>
-            <select id='category' name='categoryFilter'>
+            <label for='category'>Filter by category</label>
+            <select id='category' name='categoryFilter' onchange='this.form.submit()'>
                 <option <?= $_SESSION['categoryFilter'] == 'All' ? 'selected' : '' ?>>All</option>
                 <option <?php if(isset($_SESSION['categoryFilter']) && $_SESSION['categoryFilter'] == 'None'){ echo 'selected';}else{ echo '';} ?>>None</option>
                 <option <?php if(isset($_SESSION['categoryFilter']) && $_SESSION['categoryFilter'] == 'Work'){ echo 'selected';}else{ echo '';} ?>>Work</option>
                 <option <?php if(isset($_SESSION['categoryFilter']) && $_SESSION['categoryFilter'] == 'Personal'){ echo 'selected';}else{ echo '';} ?>>Personal</option>
             </select>
-            <input type='submit' value='Filter'>
         </form>
         <table>
             <?php

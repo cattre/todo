@@ -26,8 +26,8 @@ class ActiveTasksController
         if (isset($_GET['categoryFilter'])) {
             $_SESSION['categoryFilter'] = $_GET['categoryFilter'];
         }
-        if (isset($_SESSION['categoryFilter'])) {
-            $_SESSION['categoryFilter'] == 'All' ? $filter = '%' : $filter = $_SESSION['categoryFilter'];
+        if (isset($_SESSION['categoryFilter']) && $_SESSION['categoryFilter'] != 'All') {
+            $filter = $_SESSION['categoryFilter'];
         } else {
             $filter = '%';
         }

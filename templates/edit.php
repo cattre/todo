@@ -37,6 +37,7 @@
         <form action='/update' method='post'>
             <input type='number' name='id' value='<?= $tasks['id'] ?>' hidden>
             <input type='text' name='task' value='<?= $tasks['task'] ?>'>
+            <input type='date' name='due' value='<?= $tasks['due'] ?>'>
             <input type='submit' value='Update'>
         </form>
         <a href='/'><button>View active tasks</button></a>

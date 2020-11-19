@@ -36,12 +36,20 @@
         <h1>Active</h1>
         <table>
             <?php
+                echo
+                    '<tr>
+                        <th>Task</th>
+                        <th>Due</th>
+                    </tr>';
                 if ($tasks) {
                     foreach ($tasks as $task) {
                         echo
                             '<tr>'.
                                 '<td>'.
                                     $task['task'].
+                                '</td>'.
+                                '<td>'.
+                                    $task['due'].
                                 '</td>'.
                                 '<td>'.
                                     '<form action="/edit" method="get"><input name="'.$task['id'].'" type="submit" value="Edit"></form>'.
@@ -56,9 +64,12 @@
                 }
             ?>
         </table>
+        <h2>Add a new task</h2>
         <form action='/add' method='post'>
-            <label for='newTask'>Add a task</label>
-            <input id='newTask' type='text' name='task'>
+            <label for='task'>Task</label>
+            <input id='task' type='text' name='task'>
+            <label for='due'>Due</label>
+            <input id='due' type='date' name='due'>
             <input type='submit'>
         </form>
         <a href='/completed'><button>View completed tasks</button></a>

@@ -36,8 +36,16 @@
         <h1>Edit</h1>
         <form action='/update' method='post'>
             <input type='number' name='id' value='<?= $tasks['id'] ?>' hidden>
-            <input type='text' name='task' value='<?= $tasks['task'] ?>'>
-            <input type='date' name='due' value='<?= $tasks['due'] ?>'>
+            <label for='task'>Task</label>
+            <input type='text' id='task' name='task' value='<?= $tasks['task'] ?>'>
+            <label for='category'>Category</label>
+            <select id='category' name='category'>
+                <option <?= $tasks['category'] == 'None' ? 'selected' : '' ?>>None</option>
+                <option <?= $tasks['category'] == 'Work' ? 'selected' : '' ?>>Work</option>
+                <option <?= $tasks['category'] == 'Personal' ? 'selected' : '' ?>>Personal</option>
+            </select>
+            <label for='due'>Due</label>
+            <input type='date' id='due' name='due' value='<?= $tasks['due'] ?>'>
             <input type='submit' value='Update'>
         </form>
         <a href='/'><button>View active tasks</button></a>

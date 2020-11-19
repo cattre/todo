@@ -48,6 +48,7 @@ return function (ContainerBuilder $containerBuilder) {
     $container['EditTaskController'] = DI\Factory('App\Factories\EditTaskControllerFactory');
     $container['UpdateTaskController'] = DI\Factory('App\Factories\UpdateTaskControllerFactory');
     $container['ReopenTaskController'] = DI\Factory('App\Factories\ReopenTaskControllerFactory');
+    $container['FilterTasksController'] = DI\Factory('App\Factories\FilterTasksControllerFactory');
 
     $containerBuilder->addDefinitions($container);
 };

@@ -27,6 +27,16 @@
                 margin-right:auto;
             }
 
+            .Work {
+                background-color: indianred;
+                color: white;
+            }
+
+            .Personal {
+                background-color: lightyellow;
+                color: black;
+            }
+
             button {
                 margin: 10px;
             }
@@ -34,6 +44,16 @@
     </head>
     <body>
         <h1>Active</h1>
+        <form action='/filter' method='get'>
+            <label for='category'>Category</label>
+            <select id='category' name='categoryFilter'>
+                <option <?= $_SESSION['categoryFilter'] == 'All' ? 'selected' : '' ?>>All</option>
+                <option <?php if(isset($_SESSION['categoryFilter']) && $_SESSION['categoryFilter'] == 'None'){ echo 'selected';}else{ echo '';} ?>>None</option>
+                <option <?php if(isset($_SESSION['categoryFilter']) && $_SESSION['categoryFilter'] == 'Work'){ echo 'selected';}else{ echo '';} ?>>Work</option>
+                <option <?php if(isset($_SESSION['categoryFilter']) && $_SESSION['categoryFilter'] == 'Personal'){ echo 'selected';}else{ echo '';} ?>>Personal</option>
+            </select>
+            <input type='submit' value='Filter'>
+        </form>
         <table>
             <?php
                 echo
@@ -44,7 +64,7 @@
                 if ($tasks) {
                     foreach ($tasks as $task) {
                         echo
-                            '<tr>'.
+                            '<tr class="'.$task['category'].'">'.
                                 '<td>'.
                                     $task['task'].
                                 '</td>'.
@@ -64,14 +84,20 @@
                 }
             ?>
         </table>
+        <a href='/completed'><button>View completed tasks</button></a>
         <h2>Add a new task</h2>
         <form action='/add' method='post'>
             <label for='task'>Task</label>
             <input id='task' type='text' name='task'>
+            <label for='category'>Category</label>
+            <select id='category' name='category'>
+                <option selected>None</option>
+                <option>Work</option>
+                <option>Personal</option>
+            </select>
             <label for='due'>Due</label>
             <input id='due' type='date' name='due'>
-            <input type='submit'>
+            <input type='submit' value='Add task'>
         </form>
-        <a href='/completed'><button>View completed tasks</button></a>
     </body>
 </html>

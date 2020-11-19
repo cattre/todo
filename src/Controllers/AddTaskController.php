@@ -21,8 +21,9 @@ class AddTaskController
     public function __invoke($request, $response, $args)
     {
         $task = $request->getParsedBody()['task'];
-        $due = $request->getParsedBody()['due'];
-        $this->model->addTask($task, $due);
+        $category = $request->getParsedBody()['category'];
+        $due = $request->getParsedBody()['due'] == '' ? null : $request->getParsedBody()['due'];
+        $this->model->addTask($task, $category, $due);
         return $response->withHeader('Location','/');
     }
 }

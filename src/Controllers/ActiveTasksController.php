@@ -1,7 +1,7 @@
 <?php
 
-
 namespace App\Controllers;
+session_start();
 
 
 class ActiveTasksController
@@ -23,7 +23,9 @@ class ActiveTasksController
 
     public function __invoke($request, $response, $args)
     {
-        $tasks = $this->model->getActiveTasks();
+        $_SESSION['categoryFilter'] = $_GET['categoryFilter'] ?? 'All';
+        $_SESSION['categoryFilter'] == 'All' ? $filter = '%' : $filter = $_SESSION['categoryFilter'];
+        $tasks = $this->model->getActiveTasks($filter);
         return $this->renderer->render($response, 'index.php', ['tasks' => $tasks]);
     }
 

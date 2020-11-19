@@ -18,10 +18,10 @@ class TaskModel
         $this->db = $db;
     }
 
-    public function getActiveTasks(): array
+    public function getActiveTasks($filter): array
     {
-        $query = $this->db->prepare('SELECT * FROM `tasks` WHERE `completed` = 0 AND `archived` = 0 ORDER BY `DUE` IS NULL, `DUE` ASC;');
-        $query->execute();
+        $query = $this->db->prepare('SELECT * FROM `tasks` WHERE `completed` = 0 AND `archived` = 0 AND `category` like :filter ORDER BY `DUE` IS NULL, `DUE` ASC;');
+        $query->execute([':filter' => $filter]);
         return $query->fetchAll();
     }
 
@@ -32,10 +32,10 @@ class TaskModel
         return $query->fetchAll();
     }
 
-    public function addTask(string $task, string $due)
+    public function addTask(string $task, string $category, $due)
     {
-        $query = $this->db->prepare('INSERT INTO `tasks` (`task`, `due`) VALUES (:task, :due);');
-        $query->execute([':task' => $task, ':due' => $due]);
+        $query = $this->db->prepare('INSERT INTO `tasks` (`task`, `category`, `due`) VALUES (:task, :category, :due);');
+        $query->execute([':task' => $task, ':category' => $category, ':due' => $due]);
     }
 
     public function completeTask(int $taskId)
@@ -57,10 +57,10 @@ class TaskModel
         return $query->fetch();
     }
 
-    public function updateTask(int $taskId, string $task, string $due)
+    public function updateTask(int $taskId, string $task = '', $category, string $due = '')
     {
-        $query = $this->db->prepare('UPDATE `tasks` SET `task` = :task, `due` = :due WHERE `id` = :taskId;');
-        $query->execute([':taskId' => $taskId, ':task' => $task, ':due' => $due]);
+        $query = $this->db->prepare('UPDATE `tasks` SET `task` = :task, `category` = :category, `due` = :due WHERE `id` = :taskId;');
+        $query->execute([':taskId' => $taskId, ':task' => $task, ':category' => $category, ':due' => $due]);
     }
 
     public function reopenTask(int $taskId)

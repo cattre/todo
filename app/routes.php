@@ -9,11 +9,11 @@ return function (App $app) {
 
     $app->get('/', 'ActiveTasksController');
     $app->get('/completed', 'CompletedTasksController');
-    $app->get('/add', 'AddTaskController');
-    $app->get('/complete', 'CompleteTaskController');
-    $app->get('/delete', 'DeleteTaskController');
+    $app->post('/add', 'AddTaskController');
+    $app->post('/complete', 'CompleteTaskController');
+    $app->post('/delete', 'DeleteTaskController');
     $app->get('/edit', 'EditTaskController');
-    $app->get('/update', 'UpdateTaskController');
-    $app->get('/reopen', 'ReopenTaskController');
+    $app->post('/update', 'UpdateTaskController');
+    $app->post('/reopen', 'ReopenTaskController');
 
 };

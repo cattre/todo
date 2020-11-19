@@ -47,7 +47,7 @@
                                     '<form action="/edit" method="get"><input name="'.$task['id'].'" type="submit" value="Edit"></form>'.
                                 '</td>'.
                                 '<td>'.
-                                    '<form action="/complete" method="get"><input name="'.$task['id'].'" type="submit" value="Mark complete"></form>'.
+                                    '<form action="/complete" method="post"><input name="'.$task['id'].'" type="submit" value="Mark complete"></form>'.
                                 '</td>'.
                             '</tr>';
                     }
@@ -56,7 +56,7 @@
                 }
             ?>
         </table>
-        <form action='/add' method='get'>
+        <form action='/add' method='post'>
             <label for='newTask'>Add a task</label>
             <input id='newTask' type='text' name='task'>
             <input type='submit'>

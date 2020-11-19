@@ -44,10 +44,10 @@
                                 $task['task'].
                             '</td>'.
                             '<td>'.
-                                '<form action="/reopen" method="get"><input name="'.$task['id'].'" type="submit" value="Reopen"></form>'.
+                                '<form action="/reopen" method="post"><input name="'.$task['id'].'" type="submit" value="Reopen"></form>'.
                             '</td>'.
                             '<td>'.
-                                '<form action="/delete" method="get"><input name="'.$task['id'].'" type="submit" value="Delete"></form>'.
+                                '<form action="/delete" method="post"><input name="'.$task['id'].'" type="submit" value="Delete"></form>'.
                             '</td>'.
                         '</tr>';
                 }

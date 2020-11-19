@@ -34,7 +34,7 @@
     </head>
     <body>
         <h1>Edit</h1>
-        <form action='/update' method='get'>
+        <form action='/update' method='post'>
             <input type='number' name='id' value='<?= $tasks['id'] ?>' hidden>
             <input type='text' name='task' value='<?= $tasks['task'] ?>'>
             <input type='submit' value='Update'>

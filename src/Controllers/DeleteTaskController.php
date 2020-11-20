@@ -1,8 +1,7 @@
 <?php
 
-
 namespace App\Controllers;
-
+session_start();
 
 class DeleteTaskController
 {
@@ -20,6 +19,10 @@ class DeleteTaskController
 
     public function __invoke($request, $response, $args)
     {
+        if (!isset($_SESSION['user'])) {
+            return $response->withHeader('Location','/loginPage');
+        }
+
         $taskId = array_key_first($request->getParsedBody());
         $this->model->deleteTask($taskId);
         return $response->withHeader('Location','/completed');

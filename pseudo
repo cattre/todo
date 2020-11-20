@@ -42,8 +42,12 @@ create model class - DONE
 create model factory - DONE
 add model factory to DIC - DONE
 
-code
+--code
+
 get all tasks from db
 display tasks on page
 
+--users
+
+usersModel
 

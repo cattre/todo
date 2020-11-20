@@ -1,8 +1,7 @@
 <?php
 
-
 namespace App\Controllers;
-
+session_start();
 
 class UpdateTaskController
 {
@@ -20,6 +19,10 @@ class UpdateTaskController
 
     public function __invoke($request, $response, $args)
     {
+        if (!isset($_SESSION['user'])) {
+            return $response->withHeader('Location','/loginPage');
+        }
+
         $taskId = $request->getParsedBody()['id'];
         $task = $request->getParsedBody()['task'];
         $category = $request->getParsedBody()['category'];

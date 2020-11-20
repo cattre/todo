@@ -1,10 +1,7 @@
 <?php
 
 namespace App\Controllers;
-use http\Env\Request;
-
 session_start();
-
 
 class CompletedTasksController
 {
@@ -25,6 +22,12 @@ class CompletedTasksController
 
     public function __invoke($request, $response, $args)
     {
+        if (!isset($_SESSION['user'])) {
+            return $response->withHeader('Location','/loginPage');
+        } else {
+            $user = $_SESSION['user'];
+        }
+
         if (isset($_GET['categoryFilter'])) {
             $_SESSION['categoryFilter'] = $_GET['categoryFilter'];
         }
@@ -33,7 +36,7 @@ class CompletedTasksController
         } else {
             $filter = '%';
         }
-        $tasks = $this->model->getCompletedTasks($filter);
+        $tasks = $this->model->getCompletedTasks($user, $filter);
         return $this->renderer->render($response, 'completed.php', ['tasks' => $tasks]);
     }
 }

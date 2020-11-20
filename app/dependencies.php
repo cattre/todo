@@ -40,8 +40,15 @@ return function (ContainerBuilder $containerBuilder) {
     };
 
     $container['TaskModel'] = DI\Factory('App\Factories\TaskModelFactory');
+    $container['UsersModel'] = DI\Factory('App\Factories\UsersModelFactory');
+
+    $container['UserLoginController'] = DI\Factory('App\Factories\UserLoginControllerFactory');
+    $container['UserLogoutController'] = DI\Factory('App\Factories\UserLogoutControllerFactory');
+
+    $container['LoginPageController'] = DI\Factory('App\Factories\LoginPageControllerFactory');
     $container['ActiveTasksController'] = DI\Factory('App\Factories\ActiveTasksControllerFactory');
     $container['CompletedTasksController'] = DI\Factory('App\Factories\CompletedTasksControllerFactory');
+
     $container['AddTaskController'] = DI\Factory('App\Factories\AddTaskControllerFactory');
     $container['CompleteTaskController'] = DI\Factory('App\Factories\CompleteTaskControllerFactory');
     $container['DeleteTaskController'] = DI\Factory('App\Factories\DeleteTaskControllerFactory');

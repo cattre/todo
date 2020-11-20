@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Controllers;
+session_start();
+
+class UserLogoutController
+{
+    public $renderer;
+
+    /**
+     * UserLoginController constructor.
+     *
+     * @param $renderer
+     */
+    public function __construct($renderer)
+    {
+        $this->renderer = $renderer;
+    }
+
+    public function __invoke($request, $response, $args)
+    {
+        unset($_SESSION['user']);
+        $error = '';
+        return $this->renderer->render($response, 'loginPage.php', ['error' => $error]);
+    }
+}

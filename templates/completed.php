@@ -84,5 +84,6 @@
             ?>
         </table>
         <a href='/'><button>View active tasks</button></a>
+        <a href='/logout'><button>Log out</button></a>
     </body>
 </html>

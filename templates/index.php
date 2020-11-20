@@ -98,5 +98,6 @@
             <input id='due' type='date' name='due'>
             <input type='submit' value='Add task'>
         </form>
+        <form action='/logout' method='post'><input type='submit' value='Log out'></form>
     </body>
 </html>

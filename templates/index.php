@@ -59,7 +59,7 @@
             </select>
             <div class='btn-group btn-group-toggle' data-toggle='buttons'>
                 <label class='btn btn-secondary active'>
-                    <input type='radio' name='categoryFilter' value='All' onChange='this.form.submit()' checked> All
+                    <input type='radio' name='categoryFilter' value='' onChange='this.form.submit()' checked> All
                 </label>
                 <label class='btn btn-secondary'>
                     <input type='radio' name='categoryFilter' value='None' onChange='this.form.submit()'> None

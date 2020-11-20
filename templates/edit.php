@@ -48,6 +48,11 @@
             <input type='date' id='due' name='due' value='<?= $tasks['due'] ?>'>
             <input type='submit' value='Update'>
         </form>
+        <form action='/delete' method='post'>
+            <input type='text' name='page' value='' hidden>
+            <input type='number' name='id' value='<?= $tasks['id'] ?>' hidden>
+            <input type='submit' value='Delete task'>
+        </form>
         <a href='/'><button>View active tasks</button></a>
     </body>
 </html>

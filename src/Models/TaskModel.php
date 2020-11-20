@@ -32,10 +32,10 @@ class TaskModel
         return $query->fetchAll();
     }
 
-    public function addTask(string $task, string $category, $due)
+    public function addTask(int $user, string $task, string $category, $due)
     {
-        $query = $this->db->prepare('INSERT INTO `tasks` (`task`, `category`, `due`) VALUES (:task, :category, :due);');
-        $query->execute([':task' => $task, ':category' => $category, ':due' => $due]);
+        $query = $this->db->prepare('INSERT INTO `tasks` (`user`, `task`, `category`, `due`) VALUES (:user, :task, :category, :due);');
+        $query->execute([':user' => $user, ':task' => $task, ':category' => $category, ':due' => $due]);
     }
 
     public function completeTask(int $taskId)

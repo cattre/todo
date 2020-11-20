@@ -23,8 +23,9 @@ class DeleteTaskController
             return $response->withHeader('Location','/loginPage');
         }
 
-        $taskId = array_key_first($request->getParsedBody());
+        $page = $request->getParsedBody()['page'];
+        $taskId = $request->getParsedBody()['id'];
         $this->model->deleteTask($taskId);
-        return $response->withHeader('Location','/completed');
+        return $response->withHeader('Location','/'.$page);
     }
 }

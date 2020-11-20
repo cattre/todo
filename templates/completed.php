@@ -74,7 +74,11 @@
                                 '<form action="/reopen" method="post"><input name="'.$task['id'].'" type="submit" value="Reopen"></form>'.
                             '</td>'.
                             '<td>'.
-                                '<form action="/delete" method="post"><input name="'.$task['id'].'" type="submit" value="Delete"></form>'.
+                                '<form action="/delete" method="post">
+                                    <input name="page" type="text" value="completed" hidden>
+                                    <input name="id" type="number" value="'.$task['id'].'" hidden>
+                                    <input type="submit" value="Delete">
+                                </form>'.
                             '</td>'.
                         '</tr>';
                 }

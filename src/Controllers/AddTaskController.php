@@ -22,12 +22,14 @@ class AddTaskController
     {
         if (!isset($_SESSION['user'])) {
             return $response->withHeader('Location','/loginPage');
+        } else {
+            $user = $_SESSION['user'];
         }
 
         $task = $request->getParsedBody()['task'];
         $category = $request->getParsedBody()['category'];
         $due = $request->getParsedBody()['due'] == '' ? null : $request->getParsedBody()['due'];
-        $this->model->addTask($task, $category, $due);
+        $this->model->addTask($user, $task, $category, $due);
         return $response->withHeader('Location','/');
     }
 }

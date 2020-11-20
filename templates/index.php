@@ -22,66 +22,41 @@
 
             h1 {
                 color: lightskyblue;
-                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-                font-size: 50px;
-                margin-bottom: 0;
             }
 
-            table {
-                margin-left:auto;
-                margin-right:auto;
-            }
-
-            .Work {
-                background-color: indianred;
-                color: white;
-            }
-
-            .Personal {
-                background-color: lightyellow;
-                color: black;
-            }
-
-            button {
-                margin: 10px;
-            }
         </style>
     </head>
     <body>
         <h1>Active</h1>
         <form action='/filterActive' method='get'>
-            <label for='category'>Filter by category</label>
-            <select id='category' name='categoryFilter' onchange='this.form.submit()'>
-                <option <?= $_SESSION['categoryFilter'] == 'All' ? 'selected' : '' ?>>All</option>
-                <option <?php if(isset($_SESSION['categoryFilter']) && $_SESSION['categoryFilter'] == 'None'){ echo 'selected';}else{ echo '';} ?>>None</option>
-                <option <?php if(isset($_SESSION['categoryFilter']) && $_SESSION['categoryFilter'] == 'Work'){ echo 'selected';}else{ echo '';} ?>>Work</option>
-                <option <?php if(isset($_SESSION['categoryFilter']) && $_SESSION['categoryFilter'] == 'Personal'){ echo 'selected';}else{ echo '';} ?>>Personal</option>
-            </select>
             <div class='btn-group btn-group-toggle' data-toggle='buttons'>
-                <label class='btn btn-secondary active'>
-                    <input type='radio' name='categoryFilter' value='' onChange='this.form.submit()' checked> All
+                <label class='btn btn-secondary <?= $_SESSION['categoryFilter'] == 'All' ? 'active' : '' ?>'>
+                    <input type='radio' name='categoryFilter' value='All' onChange='this.form.submit()' <?= $_SESSION['categoryFilter'] == 'All' ? 'checked' : '' ?>> All
                 </label>
-                <label class='btn btn-secondary'>
-                    <input type='radio' name='categoryFilter' value='None' onChange='this.form.submit()'> None
+                <label class='btn btn-secondary <?= $_SESSION['categoryFilter'] == 'None' ? 'active' : '' ?>'>
+                    <input type='radio' name='categoryFilter' value='None' onChange='this.form.submit()' <?= $_SESSION['categoryFilter'] == 'None' ? 'checked' : '' ?>> None
                 </label>
-                <label class='btn btn-secondary'>
-                    <input type='radio' name='categoryFilter' value='Personal' onChange='this.form.submit()'> Personal
+                <label class='btn btn-secondary <?= $_SESSION['categoryFilter'] == 'Personal' ? 'active' : '' ?>'>
+                    <input type='radio' name='categoryFilter' value='Personal' onChange='this.form.submit()' <?= $_SESSION['categoryFilter'] == 'Personal' ? 'checked' : '' ?>> Personal
                 </label>
-                <label class='btn btn-secondary'>
-                    <input type='radio' name='categoryFilter' value='Work' onChange='this.form.submit()'> Work
+                <label class='btn btn-secondary <?= $_SESSION['categoryFilter'] == 'Work' ? 'active' : '' ?>'>
+                    <input type='radio' name='categoryFilter' value='Work' onChange='this.form.submit()' <?= $_SESSION['categoryFilter'] == 'Work' ? 'checked' : '' ?>> Work
                 </label>
             </div>
         </form>
-        <table>
+        <table class='table table-striped table-hover container'>
             <?php
                 if ($tasks) { ?>
-                    <tr>
-                        <th>Task</th>
-                        <th>Category</th>
-                        <th>Due</th>
-                    </tr>
-                    <?php foreach ($tasks as $task): ?>
+                    <thead>
                         <tr>
+                            <th>Task</th>
+                            <th>Category</th>
+                            <th>Due</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($tasks as $task): ?>
+                        <tr onSelect = ''>
                             <td>
                             <?= $task['task'] ?>
                             </td>
@@ -91,13 +66,15 @@
                             <td>
                             <?= $task['due'] ?>
                             </td>
-                            <td>
+                            <td class='bg-white border-0'>
                             <form action='/edit' method='get'>
                                 <input name=' <?= $task['id'] ?>' type='submit' value='Edit'>
                             </form>
                             </td>
-                            <td>
-                            <form action='/complete' method='post'><input name='<?= $task['id'] ?>' type='submit' value='Mark complete'></form>
+                            <td class='bg-white border-0'>
+                            <form action='/complete' method='post'>
+                                <input name='<?= $task['id'] ?>' type='submit' value='Mark complete'>
+                            </form>
                             </td>
                             </tr>
                     <?php endforeach;
@@ -105,6 +82,7 @@
                     echo 'No active tasks';
                 }
             ?>
+            </tbody>
         </table>
         <a href='/completed'><button>View completed tasks</button></a>
         <h2>Add a new task</h2>

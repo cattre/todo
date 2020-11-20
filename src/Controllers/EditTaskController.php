@@ -22,9 +22,6 @@ class EditTaskController
 
     public function __invoke($request, $response, $args)
     {
-        if (!isset($_SESSION['user'])) {
-            return $response->withHeader('Location','/loginPage');
-        }
 
         $taskId = array_key_first($request->getQueryParams());
         $tasks = $this->model->getTask($taskId);

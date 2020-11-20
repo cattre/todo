@@ -19,9 +19,6 @@ class CompleteTaskController
 
     public function __invoke($request, $response, $args)
     {
-        if (!isset($_SESSION['user'])) {
-            return $response->withHeader('Location','/loginPage');
-        }
 
         $taskId = array_key_first($request->getParsedBody());
         $this->model->completeTask($taskId);

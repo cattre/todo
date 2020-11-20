@@ -19,9 +19,6 @@ class DeleteTaskController
 
     public function __invoke($request, $response, $args)
     {
-        if (!isset($_SESSION['user'])) {
-            return $response->withHeader('Location','/loginPage');
-        }
 
         $page = $request->getParsedBody()['page'];
         $taskId = $request->getParsedBody()['id'];

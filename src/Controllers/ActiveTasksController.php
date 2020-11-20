@@ -22,11 +22,7 @@ class ActiveTasksController
 
     public function __invoke($request, $response, $args)
     {
-        if (!isset($_SESSION['user'])) {
-            return $response->withHeader('Location','/loginPage');
-        } else {
-            $user = $_SESSION['user'];
-        }
+        $user = $_SESSION['user'];
 
         if (isset($_GET['categoryFilter'])) {
             $_SESSION['categoryFilter'] = $_GET['categoryFilter'];

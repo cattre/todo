@@ -42,6 +42,7 @@ return function (ContainerBuilder $containerBuilder) {
     $container['TaskModel'] = DI\Factory('App\Factories\TaskModelFactory');
     $container['UsersModel'] = DI\Factory('App\Factories\UsersModelFactory');
 
+    $container['LoginCheckMiddleware'] = DI\Factory('App\Factories\LoginCheckMiddlewareFactory');
     $container['UserLoginController'] = DI\Factory('App\Factories\UserLoginControllerFactory');
     $container['UserLogoutController'] = DI\Factory('App\Factories\UserLogoutControllerFactory');
 

@@ -55,32 +55,36 @@
         </form>
         <table>
             <?php
-                echo
-                    '<tr>
-                        <th>Task</th>
-                        <th>Due</th>
-                    </tr>';
-                if ($tasks) {
-                    foreach ($tasks as $task) {
-                        echo
-                            '<tr class="'.$task['category'].'">'.
-                                '<td>'.
-                                    $task['task'].
-                                '</td>'.
-                                '<td>'.
-                                    $task['due'].
-                                '</td>'.
-                                '<td>'.
-                                    '<form action="/edit" method="get"><input name="'.$task['id'].'" type="submit" value="Edit"></form>'.
-                                '</td>'.
-                                '<td>'.
-                                    '<form action="/complete" method="post"><input name="'.$task['id'].'" type="submit" value="Mark complete"></form>'.
-                                '</td>'.
-                            '</tr>';
-                    }
-                } else {
-                    echo 'No active tasks';
-                }
+            if ($tasks) { ?>
+                <tr>
+                    <th>Task</th>
+                    <th>Category</th>
+                    <th>Due</th>
+                </tr>
+                <?php foreach ($tasks as $task): ?>
+                    <tr>
+                        <td>
+                            <?= $task['task'] ?>
+                        </td>
+                        <td>
+                            <i class=' <?= $task['category'] == 'Work' ? 'fas fa-briefcase' : ($task['category'] == 'Personal' ? 'fas fa-walking' : '') ?> '/>
+                        </td>
+                        <td>
+                            <?= $task['due'] ?>
+                        </td>
+                        <td>
+                            <form action='/edit' method='get'>
+                                <input name=' <?= $task['id'] ?>' type='submit' value='Edit'>
+                            </form>
+                        </td>
+                        <td>
+                            <form action='/complete' method='post'><input name='<?= $task['id'] ?>' type='submit' value='Mark complete'></form>
+                        </td>
+                    </tr>
+                <?php endforeach;
+            } else {
+                echo 'No active tasks';
+            }
             ?>
         </table>
         <a href='/completed'><button>View completed tasks</button></a>

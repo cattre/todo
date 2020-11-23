@@ -22,7 +22,6 @@ class EditTaskController
 
     public function __invoke($request, $response, $args)
     {
-
         $taskId = array_key_first($request->getQueryParams());
         $tasks = $this->model->getTask($taskId);
         return $this->renderer->render($response, 'edit.php', ['tasks' => $tasks]);

@@ -3,7 +3,7 @@
 namespace App\Controllers;
 session_start();
 
-class CompleteTaskController
+class UpdateTaskStatusController
 {
     private $model;
 
@@ -21,7 +21,9 @@ class CompleteTaskController
     {
 
         $taskId = array_key_first($request->getParsedBody());
-        $this->model->completeTask($taskId);
+        $task = $this->model->getTask($taskId);
+        $task['completed'] == 1 ? $status = 0 : $status = 1;
+        $this->model->updateStatus($taskId, $status);
         return $response->withHeader('Location','/');
     }
 }

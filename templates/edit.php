@@ -4,54 +4,49 @@
         <meta charset="utf-8"/>
         <title>To Do App</title>
         <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
-        <style>
-            body {
-                margin: 50px 0 0 0;
-                padding: 0;
-                width: 100%;
-                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-                text-align: center;
-                color: #aaa;
-                font-size: 18px;
-            }
-
-            h1 {
-                color: mediumseagreen;
-                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-                font-size: 50px;
-                margin-bottom: 0;
-            }
-
-            table {
-                margin-left:auto;
-                margin-right:auto;
-            }
-
-            button {
-                margin: 10px;
-            }
-        </style>
+        <link rel='stylesheet' href='css/style.css' type='text/css'>
     </head>
     <body>
         <h1>Edit</h1>
         <form action='/update' method='post'>
-            <input type='number' name='id' value='<?= $tasks['id'] ?>' hidden>
-            <label for='task'>Task</label>
-            <input type='text' id='task' name='task' value='<?= $tasks['task'] ?>'>
-            <label for='category'>Category</label>
-            <select id='category' name='category'>
-                <option <?= $tasks['category'] == 'None' ? 'selected' : '' ?>>None</option>
-                <option <?= $tasks['category'] == 'Work' ? 'selected' : '' ?>>Work</option>
-                <option <?= $tasks['category'] == 'Personal' ? 'selected' : '' ?>>Personal</option>
-            </select>
-            <label for='due'>Due</label>
-            <input type='date' id='due' name='due' value='<?= $tasks['due'] ?>'>
-            <input type='submit' value='Update'>
-        </form>
-        <form action='/delete' method='post'>
-            <input type='text' name='page' value='' hidden>
-            <input type='number' name='id' value='<?= $tasks['id'] ?>' hidden>
-            <input type='submit' value='Delete task'>
+            <div class="container">
+                <div class="row">
+                    <input type='number' name='id' value='<?= $tasks['id'] ?>' hidden>
+                </div>
+                <div class="row">
+                    <label for='task'>Task</label>
+                </div>
+                <div class="row">
+                    <input type='text' id='task' name='task' value='<?= $tasks['task'] ?>'>
+                </div>
+                <div class="row">
+                    <label for='category'>Category</label>
+                </div>
+                <div class="row">
+                    <select id='category' name='category'>
+                        <option <?= $tasks['category'] == 'None' ? 'selected' : '' ?>>None</option>
+                        <option <?= $tasks['category'] == 'Work' ? 'selected' : '' ?>>Work</option>
+                        <option <?= $tasks['category'] == 'Personal' ? 'selected' : '' ?>>Personal</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <label for='due'>Due</label>
+                </div>
+                <div class="row">
+                    <input type='date' id='due' name='due' value='<?= $tasks['due'] ?>'>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <input type='submit' value='Update'>
+                    </div>
+                    <div class="col-sm">
+                        <form action='/delete' method='post'>
+                            <input type='text' name='page' value='' hidden>
+                            <input type='number' name='id' value='<?= $tasks['id'] ?>' hidden>
+                            <input type='submit' value='Delete task'>
+                        </form>
+                    </div>
+                </div>
         </form>
         <a href='/'><button>View active tasks</button></a>
     </body>

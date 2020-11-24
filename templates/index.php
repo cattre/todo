@@ -14,12 +14,11 @@
         <script defer src='js/completedTasks.js'></script>
     </head>
     <body>
-    <?php var_dump($_SESSION); ?>
-        <h1>Active</h1>
+        <h1>Tasks</h1>
         <form action='/categoryFilter' method='get'>
             <div class='btn-group btn-group-toggle' data-toggle='buttons'>
                 <label class='btn btn-secondary <?= $_SESSION['category'] == '%' ? 'active' : '' ?>'>
-                    <input type='radio' name='category' value='All' onChange='this.form.submit()' <?= $_SESSION['category'] == '%' ? 'checked' : '' ?>> All
+                    <input type='radio' name='category' value='%' onChange='this.form.submit()' <?= $_SESSION['category'] == '%' ? 'checked' : '' ?>> All
                 </label>
                 <label class='btn btn-secondary <?= $_SESSION['category'] == 'None' ? 'active' : '' ?>'>
                     <input type='radio' name='category' value='None' onChange='this.form.submit()' <?= $_SESSION['category'] == 'None' ? 'checked' : '' ?>> None

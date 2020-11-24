@@ -13,7 +13,7 @@
     <body>
         <div class='vertical-center'>
             <div class='container'>
-            <h1 class='text-center'>Edit</h1>
+            <h1 class='text-center'>Edit task</h1>
                 <div class='row justify-content-md-center'>
                     <form action='/' method='get'>
                         <input type='submit' value='Back' class='btn btn-warning'>

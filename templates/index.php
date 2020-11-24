@@ -81,20 +81,20 @@
                             <td>
                             </td>
                             <td>
-                                <input id='task' type='text' name='task'>
+                                <input id='task' class='form-control' type='text' name='task'>
                             </td>
                             <td>
-                                <select id='category' name='category'>
+                                <select id='category' class='form-control' name='category'>
                                     <option selected>None</option>
                                     <option>Work</option>
                                     <option>Personal</option>
                                 </select>
                             </td>
                             <td>
-                                <input id='due' type='date' name='due'>
+                                <input id='due' class='form-control' type='date' name='due'>
                             </td>
                             <td>
-                                <input type='submit' value='Add task'>
+                                <input type='submit' class='btn btn-success' value='Add task'>
                             </td>
                         </form>
                     </tr>
@@ -102,7 +102,7 @@
         </table>
         <div class='container'>
             <div data-toggle='collapse' type='button' class='collapse-header' data-target='#completed' aria-expanded='false' aria-controls='completed'>
-                <h4>Completed [count] <i class='fas fa-chevron-up'></i></h4>
+                <h4>Completed (<?= $count; ?>) <i class='fas fa-chevron-up'></i></h4>
             </div>
             <div id='completed' class='collapse'>
                 <div class='card card-body bg-transparent'>

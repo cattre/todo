@@ -26,8 +26,7 @@ class DisplayTasksController
         $category = $_SESSION['category'];
 
         $tasks = $this->model->getTasks($user, $category);
-        return $this->renderer->render($response, 'index.php', ['tasks' => $tasks]);
+        $count = $this->model->getCompletedTaskCount($user, $category);
+        return $this->renderer->render($response, 'index.php', ['tasks' => $tasks, 'count' => $count]);
     }
-
-
 }

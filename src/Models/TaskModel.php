@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Models;
-
 
 class TaskModel
 {
@@ -18,18 +16,18 @@ class TaskModel
         $this->db = $db;
     }
 
-    public function getActiveTasks($user, $filter): array
-    {
-        $query = $this->db->prepare('SELECT * FROM `tasks` WHERE `user` = :id AND `completed` = 0 AND `archived` = 0 AND `category` like :filter ORDER BY `DUE` IS NULL, `DUE` ASC;');
-        $query->execute([':id' => $user, ':filter' => $filter]);
-        return $query->fetchAll();
-    }
-
     public function getTasks($user, string $filter): array
     {
         $query = $this->db->prepare('SELECT * FROM `tasks` WHERE `user` = :id AND `archived` = 0 AND `category` like :filter ORDER BY `DUE` IS NULL, `DUE` ASC;');
         $query->execute([':id' => $user, ':filter' => $filter]);
         return $query->fetchAll();
+    }
+
+    public function getCompletedTaskCount($user, string $filter): string
+    {
+        $query = $this->db->prepare('SELECT count(*) AS count FROM `tasks` WHERE `user` = :id AND `completed` = 1 AND `archived` = 0 AND `category` like :filter ORDER BY `DUE` IS NULL, `DUE` ASC;');
+        $query->execute([':id' => $user, ':filter' => $filter]);
+        return $query->fetch()['count'];
     }
 
     public function addTask(int $user, string $task, string $category, $due)

@@ -19,7 +19,6 @@ class UpdateTaskStatusController
 
     public function __invoke($request, $response, $args)
     {
-
         $taskId = array_key_first($request->getParsedBody());
         $task = $this->model->getTask($taskId);
         $task['completed'] == 1 ? $status = 0 : $status = 1;

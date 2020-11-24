@@ -1,12 +1,12 @@
 body {
     background-color: #2b2c2c;
-    margin: 50px 0 0 0;
-    padding: 0;
-    width: 100%;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    text-align: center;
-    color: #aaa;
-    font-size: 18px;
+    /*margin: 50px 0 0 0;*/
+    /*padding: 0;*/
+    /*width: 100%;*/
+    /*font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+    /*text-align: center;*/
+    color: white;
+    /*font-size: 18px;*/
 }
 
 h1 {
@@ -27,4 +27,9 @@ h1 {
 
 .checkbox-round:checked {
     background-color: lightskyblue;
+}
+
+.task:hover {
+    background-color: lightskyblue;
+    color: white;
 }

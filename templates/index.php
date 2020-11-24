@@ -10,21 +10,16 @@
         <link rel='stylesheet' href='css/style.css' type='text/css'>
         <script defer src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous'></script>
         <script defer src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx' crossorigin='anonymous'></script>
-        <script defer src='js/forms.js'></script>
+        <script defer src='js/editTask.js'></script>
+        <script defer src='js/completedTasks.js'></script>
     </head>
     <body>
+    <?php var_dump($_SESSION); ?>
         <h1>Active</h1>
-        <form action='/statusFilter' method='get'>
-            <div class='btn-group btn-group-toggle' data-toggle='buttons'>
-                <label class='btn btn-secondary <?= $_SESSION['status'] == 'All' ? 'active' : '' ?>'>
-                    <input type='checkbox' name='status' value='All' onChange='this.form.submit()' <?= $_SESSION['status'] == 'All' ? 'checked' : '' ?>> Show Completed
-                </label>
-            </div>
-        </form>
         <form action='/categoryFilter' method='get'>
             <div class='btn-group btn-group-toggle' data-toggle='buttons'>
-                <label class='btn btn-secondary <?= $_SESSION['category'] == 'All' ? 'active' : '' ?>'>
-                    <input type='radio' name='category' value='All' onChange='this.form.submit()' <?= $_SESSION['category'] == 'All' ? 'checked' : '' ?>> All
+                <label class='btn btn-secondary <?= $_SESSION['category'] == '%' ? 'active' : '' ?>'>
+                    <input type='radio' name='category' value='All' onChange='this.form.submit()' <?= $_SESSION['category'] == '%' ? 'checked' : '' ?>> All
                 </label>
                 <label class='btn btn-secondary <?= $_SESSION['category'] == 'None' ? 'active' : '' ?>'>
                     <input type='radio' name='category' value='None' onChange='this.form.submit()' <?= $_SESSION['category'] == 'None' ? 'checked' : '' ?>> None
@@ -38,65 +33,107 @@
             </div>
         </form>
         <table class='table-dark table-striped table-hover container'>
-            <?php
-                if ($tasks) { ?>
-                    <thead>
-                        <tr>
-                            <th>Completed</th>
-                            <th>Task</th>
-                            <th>Category</th>
-                            <th>Due</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($tasks as $task): ?>
-                        <tr class='task' id='<?= $task['id'] ?>'>
-                            <td>
-                                <form action='/toggleStatus' method='post'>
-                                    <input name='<?= $task['id'] ?>' type='checkbox' class='checkbox-round' <?= $task['completed'] == '1' ? 'checked' : '' ?> onChange='this.form.submit()'>
-                                    <input name='<?= $task['id'] ?>' type='number' hidden>
-                                </form>
-                            </td>
-                            <td>
-                            <?= $task['task'] ?>
-                            </td>
-                            <td>
-                                <i <?= $task['category'] == 'Work' ? 'class="fas fa-briefcase" alt="Work" title="Work"' : ($task['category'] == 'Personal' ? 'class="fas fa-walking" alt="Personal" title="Personal"' : '') ?> '/>
-                            </td>
-                            <td>
-                            <?= $task['due'] ?>
-                            </td>
-                        </tr>
-                    <?php endforeach;
-                } else {
-                    echo 'No active tasks';
-                }
-            ?>
-                <tr>
-                    <form action='/add' method='post'>
-                        <td>
-                        </td>
-                        <td>
-                            <input id='task' type='text' name='task'>
-                        </td>
-                        <td>
-                            <select id='category' name='category'>
-                                <option selected>None</option>
-                                <option>Work</option>
-                                <option>Personal</option>
-                            </select>
-                        </td>
-                        <td>
-                            <input id='due' type='date' name='due'>
-                        </td>
-                        <td>
-                            <input type='submit' value='Add task'>
-                        </td>
-                    </form>
-                </tr>
-            </tbody>
+            <?php if ($tasks) { ?>
+                <thead>
+                    <tr>
+                        <th>Completed</th>
+                        <th>Task</th>
+                        <th>Category</th>
+                        <th>Due</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($tasks as $task):
+                        if ($task['completed'] == '0') { ?>
+                            <tr class='task' id='<?= $task['id'] ?>'>
+                                <td>
+                                    <form action='/toggleStatus' method='post'>
+                                        <input name='<?= $task['id'] ?>' type='checkbox' class='checkbox-round' <?= $task['completed'] == '1' ? 'checked' : '' ?> onChange='this.form.submit()'>
+                                        <input name='<?= $task['id'] ?>' type='number' hidden>
+                                    </form>
+                                </td>
+                                <td>
+                                <?= $task['task'] ?>
+                                </td>
+                                <td>
+                                    <i <?= $task['category'] == 'Work' ? 'class="fas fa-briefcase" alt="Work" title="Work"' : ($task['category'] == 'Personal' ? 'class="fas fa-walking" alt="Personal" title="Personal"' : '') ?> '/>
+                                </td>
+                                <td>
+                                <?= $task['due'] ?>
+                                </td>
+                            </tr>
+                        <?php }
+                    endforeach;
+            } else {
+                echo 'No active tasks';
+            } ?>
+            <tr>
+                <form action='/add' method='post'>
+                    <td>
+                    </td>
+                    <td>
+                        <input id='task' type='text' name='task'>
+                    </td>
+                    <td>
+                        <select id='category' name='category'>
+                            <option selected>None</option>
+                            <option>Work</option>
+                            <option>Personal</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input id='due' type='date' name='due'>
+                    </td>
+                    <td>
+                        <input type='submit' value='Add task'>
+                    </td>
+                </form>
+            </tr>
+        </tbody>
+    </table>
+    <div data-toggle='collapse' class='collapse-header' data-target='#completed' aria-expanded='false' aria-controls='completed'>
+        <h4>Completed tasks</h4>
+        <i class='fas fa-chevron-up'></i>
+    </div>
+    <div id='completed' class='collapse'>
+        <table class='table-dark table-striped table-hover container'>
+            <?php if ($tasks) { ?>
+                <thead>
+                    <tr>
+                        <th>Completed</th>
+                        <th>Task</th>
+                        <th>Category</th>
+                        <th>Due</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($tasks as $task):
+                        if ($task['completed'] == '1') { ?>
+                            <tr class='task' id='<?= $task['id'] ?>'>
+                                <td>
+                                    <form action='/toggleStatus' method='post'>
+                                        <input name='<?= $task['id'] ?>' type='checkbox' class='checkbox-round' <?= $task['completed'] == '1' ? 'checked' : '' ?> onChange='this.form.submit()'>
+                                        <input name='<?= $task['id'] ?>' type='number' hidden>
+                                    </form>
+                                </td>
+                                <td>
+                                    <?= $task['task'] ?>
+                                </td>
+                                <td>
+                                    <i <?= $task['category'] == 'Work' ? 'class="fas fa-briefcase" alt="Work" title="Work"' : ($task['category'] == 'Personal' ? 'class="fas fa-walking" alt="Personal" title="Personal"' : '') ?> '/>
+                                </td>
+                                <td>
+                                    <?= $task['due'] ?>
+                                </td>
+                            </tr>
+                        <?php }
+                    endforeach;
+            } else {
+                echo 'No active tasks';
+            } ?>
+                </tbody>
         </table>
-        <a href='/completed'><button>View completed tasks</button></a>
+    </div>
         <form action='/logout' method='post'><input type='submit' value='Log out'></form>
     </body>
 </html>

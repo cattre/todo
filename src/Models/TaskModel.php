@@ -25,10 +25,10 @@ class TaskModel
         return $query->fetchAll();
     }
 
-    public function getTasks($user, string $status, string $filter): array
+    public function getTasks($user, string $filter): array
     {
-        $query = $this->db->prepare('SELECT * FROM `tasks` WHERE `user` = :id AND `archived` = 0 AND `completed` like :status AND `category` like :filter ORDER BY `DUE` IS NULL, `DUE` ASC;');
-        $query->execute([':id' => $user, ':status' => $status, ':filter' => $filter]);
+        $query = $this->db->prepare('SELECT * FROM `tasks` WHERE `user` = :id AND `archived` = 0 AND `category` like :filter ORDER BY `DUE` IS NULL, `DUE` ASC;');
+        $query->execute([':id' => $user, ':filter' => $filter]);
         return $query->fetchAll();
     }
 

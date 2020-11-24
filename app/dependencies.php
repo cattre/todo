@@ -42,19 +42,19 @@ return function (ContainerBuilder $containerBuilder) {
     $container['TaskModel'] = DI\Factory('App\Factories\TaskModelFactory');
     $container['UsersModel'] = DI\Factory('App\Factories\UsersModelFactory');
 
+    $container['LoginCheckMiddleware'] = DI\Factory('App\Factories\LoginCheckMiddlewareFactory');
     $container['UserLoginController'] = DI\Factory('App\Factories\UserLoginControllerFactory');
     $container['UserLogoutController'] = DI\Factory('App\Factories\UserLogoutControllerFactory');
 
     $container['LoginPageController'] = DI\Factory('App\Factories\LoginPageControllerFactory');
-    $container['ActiveTasksController'] = DI\Factory('App\Factories\ActiveTasksControllerFactory');
-    $container['CompletedTasksController'] = DI\Factory('App\Factories\CompletedTasksControllerFactory');
+    $container['DisplayTasksController'] = DI\Factory('App\Factories\DisplayTasksControllerFactory');
+    $container['FilterTasksController'] = DI\Factory('App\Factories\FilterTasksControllerFactory');
 
     $container['AddTaskController'] = DI\Factory('App\Factories\AddTaskControllerFactory');
-    $container['CompleteTaskController'] = DI\Factory('App\Factories\CompleteTaskControllerFactory');
+    $container['UpdateTaskStatusController'] = DI\Factory('App\Factories\UpdateTaskStatusControllerFactory');
     $container['DeleteTaskController'] = DI\Factory('App\Factories\DeleteTaskControllerFactory');
     $container['EditTaskController'] = DI\Factory('App\Factories\EditTaskControllerFactory');
     $container['UpdateTaskController'] = DI\Factory('App\Factories\UpdateTaskControllerFactory');
-    $container['ReopenTaskController'] = DI\Factory('App\Factories\ReopenTaskControllerFactory');
 
     $containerBuilder->addDefinitions($container);
 };

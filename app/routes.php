@@ -7,21 +7,21 @@ use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 return function (App $app) {
     $container = $app->getContainer();
 
-    $app->get('/', 'ActiveTasksController');
     $app->get('/loginPage', 'LoginPageController');
-    $app->get('/completed', 'CompletedTasksController');
+    $app->get('/', 'FilterTasksController')->add('LoginCheckMiddleware');
+    $app->get('/tasks', 'DisplayTasksController')->add('LoginCheckMiddleware');
 
     $app->post('/login', 'UserLoginController');
     $app->post('/logout', 'UserLogoutController');
 
-    $app->post('/add', 'AddTaskController');
-    $app->post('/complete', 'CompleteTaskController');
-    $app->post('/delete', 'DeleteTaskController');
-    $app->get('/edit', 'EditTaskController');
-    $app->post('/update', 'UpdateTaskController');
-    $app->post('/reopen', 'ReopenTaskController');
+    $app->post('/add', 'AddTaskController')->add('LoginCheckMiddleware');
+    $app->post('/toggleStatus', 'UpdateTaskStatusController')->add('LoginCheckMiddleware');
+    $app->post('/delete', 'DeleteTaskController')->add('LoginCheckMiddleware');
+    $app->get('/edit', 'EditTaskController')->add('LoginCheckMiddleware');
+    $app->post('/update', 'UpdateTaskController')->add('LoginCheckMiddleware');
 
-    $app->get('/filterActive', 'ActiveTasksController');
-    $app->get('/filterCompleted', 'CompletedTasksController');
+    $app->get('/categoryFilter', 'FilterTasksController')->add('LoginCheckMiddleware');
+    $app->get('/statusFilter', 'FilterTasksController')->add('LoginCheckMiddleware');
+    $app->get('/filterCompleted', 'CompletedTasksController')->add('LoginCheckMiddleware');
 
 };

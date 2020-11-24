@@ -3,13 +3,13 @@
 namespace App\Controllers;
 session_start();
 
-class EditTaskController
+class DisplayTasksController
 {
     private $model;
     private $renderer;
 
     /**
-     * EditTaskController constructor.
+     * ActiveTasksController constructor.
      *
      * @param $model
      * @param $renderer
@@ -22,8 +22,12 @@ class EditTaskController
 
     public function __invoke($request, $response, $args)
     {
-        $taskId = array_key_first($request->getQueryParams());
-        $tasks = $this->model->getTask($taskId);
-        return $this->renderer->render($response, 'edit.php', ['tasks' => $tasks]);
+        $user = $_SESSION['user'];
+        $category = $_SESSION['category'];
+
+        $tasks = $this->model->getTasks($user, $category);
+        return $this->renderer->render($response, 'index.php', ['tasks' => $tasks]);
     }
+
+
 }

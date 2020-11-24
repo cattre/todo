@@ -25,9 +25,9 @@ class TaskModel
         return $query->fetchAll();
     }
 
-    public function getCompletedTasks($user, $filter): array
+    public function getTasks($user, string $filter): array
     {
-        $query = $this->db->prepare('SELECT * FROM `tasks` WHERE `user` = :id AND `completed` = 1 AND `archived` = 0 AND `category` like :filter ORDER BY `DUE` IS NULL, `DUE` ASC;');
+        $query = $this->db->prepare('SELECT * FROM `tasks` WHERE `user` = :id AND `archived` = 0 AND `category` like :filter ORDER BY `DUE` IS NULL, `DUE` ASC;');
         $query->execute([':id' => $user, ':filter' => $filter]);
         return $query->fetchAll();
     }
@@ -38,10 +38,10 @@ class TaskModel
         $query->execute([':user' => $user, ':task' => $task, ':category' => $category, ':due' => $due]);
     }
 
-    public function completeTask(int $taskId)
+    public function updateStatus(int $taskId, int $status)
     {
-        $query = $this->db->prepare('UPDATE `tasks` SET `completed` = 1 WHERE `id` = :taskId;');
-        $query->execute([':taskId' => $taskId]);
+        $query = $this->db->prepare('UPDATE `tasks` SET `completed` = :status WHERE `id` = :taskId;');
+        $query->execute([':taskId' => $taskId, ':status' => $status]);
     }
 
     public function deleteTask(int $taskId)

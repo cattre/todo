@@ -3,12 +3,12 @@
 namespace App\Controllers;
 session_start();
 
-class ReopenTaskController
+class UpdateTaskStatusController
 {
     private $model;
 
     /**
-     * ReopenTaskController constructor.
+     * CompleteTaskController constructor.
      *
      * @param $model
      */
@@ -19,12 +19,10 @@ class ReopenTaskController
 
     public function __invoke($request, $response, $args)
     {
-        if (!isset($_SESSION['user'])) {
-            return $response->withHeader('Location','/loginPage');
-        }
-
         $taskId = array_key_first($request->getParsedBody());
-        $this->model->reopenTask($taskId);
-        return $response->withHeader('Location','/completed');
+        $task = $this->model->getTask($taskId);
+        $task['completed'] == 1 ? $status = 0 : $status = 1;
+        $this->model->updateStatus($taskId, $status);
+        return $response->withHeader('Location','/');
     }
 }

@@ -1,0 +1,32 @@
+body {
+    background-color: #2b2c2c;
+    color: white;
+}
+
+.checkbox-round {
+    width: 1.3em;
+    height: 1.3em;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.checkbox-round:checked {
+    background-color: lightskyblue;
+}
+
+.task:hover {
+    background-color: lightskyblue;
+    color: white;
+}
+
+.vertical-center {
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}

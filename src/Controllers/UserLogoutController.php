@@ -19,7 +19,7 @@ class UserLogoutController
 
     public function __invoke($request, $response, $args)
     {
-        unset($_SESSION['user']);
+        session_destroy();
         $error = '';
         return $this->renderer->render($response, 'loginPage.php', ['error' => $error]);
     }

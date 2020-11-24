@@ -49,14 +49,12 @@ return function (ContainerBuilder $containerBuilder) {
     $container['LoginPageController'] = DI\Factory('App\Factories\LoginPageControllerFactory');
     $container['DisplayTasksController'] = DI\Factory('App\Factories\DisplayTasksControllerFactory');
     $container['FilterTasksController'] = DI\Factory('App\Factories\FilterTasksControllerFactory');
-    $container['CompletedTasksController'] = DI\Factory('App\Factories\CompletedTasksControllerFactory');
 
     $container['AddTaskController'] = DI\Factory('App\Factories\AddTaskControllerFactory');
     $container['UpdateTaskStatusController'] = DI\Factory('App\Factories\UpdateTaskStatusControllerFactory');
     $container['DeleteTaskController'] = DI\Factory('App\Factories\DeleteTaskControllerFactory');
     $container['EditTaskController'] = DI\Factory('App\Factories\EditTaskControllerFactory');
     $container['UpdateTaskController'] = DI\Factory('App\Factories\UpdateTaskControllerFactory');
-//    $container['ReopenTaskController'] = DI\Factory('App\Factories\ReopenTaskControllerFactory');
 
     $containerBuilder->addDefinitions($container);
 };

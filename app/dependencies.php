@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+require_once '../../connectDB.php';
 
 use DI\ContainerBuilder;
 use Monolog\Handler\StreamHandler;
@@ -33,11 +34,7 @@ return function (ContainerBuilder $containerBuilder) {
         return $renderer;
     };
 
-    $container['pdo'] = function (ContainerInterface $container) {
-        $pdo = new PDO('mysql:host=127.0.0.1; dbname=todo', 'root', 'password');
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        return $pdo;
-    };
+    $container['pdo'] = connectDB('todo');
 
     $container['TaskModel'] = DI\Factory('App\Factories\TaskModelFactory');
     $container['UsersModel'] = DI\Factory('App\Factories\UsersModelFactory');
